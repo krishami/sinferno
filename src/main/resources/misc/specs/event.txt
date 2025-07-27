@@ -1,0 +1,167 @@
+MVP will be the following
+* We have 2 different sportsEvent types - ROUND and MATCH
+* Only top-level items can have Sports Type and Sports SubType
+    - All others will inherit from them and will have null when saved
+    - You can only edit the Sports Type and Sports SubType when there are no sub-sportsEvents
+* Only top-level items will have "Timezone Type"
+    - All others will inherit from them and will have null when saved
+    - You can continue to edit the Timezone Type ONLY when there are no matches
+    - We have "OTHER" because preventing the user from selecting a timezone may be unduly restrictive
+    - Even though an sportsEvent may happen in multiple venues, we restrict this to the top-level because if user selects
+        * "USER" at top-level, all times will be in the logged-in user time
+        * "VENUE" at top-level, all times will be specific to the venue of the individual sportsEvent
+        * "OTHER", all times will be in the selected time
+* Only matches will have a time component and hence subject to timezone manipulation
+* We do not store "DateTime".
+    - We store a "Local Date" (with no time component) and a "Time" as string in separate fields
+    - We also store the Timezone Type and Timezone
+    - The value in the database is treated as being in that timezone
+    - When we show it in the UI, we will show it in User's Time, Venue Time or Other Time (based on timezone Type)
+    - "UTC" is not used
+* There are 3 possible options for the user
+    * Allow them to use their own user timezone
+        - This is easy and most relevant to their understanding of the sportsEvent
+    * Allow them to use the timezone of the venue
+        - This is also straightforward as it matches the place where the sportsEvent is taking place
+    * Allow them to choose a specific timezone
+        - In some situations, they may not be aware of the timezone
+        - and may be coordinating with people from different places
+
+* Most time conversions are fine except for that weird repeated hour during Daylight Savings
+    - This is practically very unlikely to happen since most sportsEvents are not recorded at midnight
+    - This might be one of those high-class problems because if we are dealing with a
+      situation where we have to manage timezones from across the world, we are probably successful
+      beyond our wildest dreams and will likely have resources to deal with it
+
+* We will limit description to 10000 characters even though we use a TEXT field
+
+
+Top-Level Event Creation
+* Allow to create any sportsEvent type: ROUND or MATCH.
+  - Since a ROUND can be group-like, we can make the tournament a group if we need to
+
+* Nothing can be created under a MATCH. So if user selects MATCH, show the MATCH attributes & score screen
+    - When creating a one-off match, we will need the "match" rules. Actually this is required at every level.
+      It will be inherited
+    - This may also be required when creating Matches in tournaments, but they will default to the closest parent that has them
+
+* Top-level items will have the following
+    - + sports_event_id auto-generated
+    - + owner_id programmatically added
+    - + root_id, parent_id, left_sibling_id are all NULL
+    - * Enter name (mandatory)
+    - * Choose a Sports Type (mandatory)
+    - * Choose a Sports Sub Type (mandatory)
+    - * Enter gender (mandatory - use can choose N.A.)
+    - - Enter description (optional)
+    - - Choose a Venue (optional)
+    - - Enter start date (optional - only time component for MATCH)
+    - - Enter end date (optional  - only time component for MATCH)
+    - - Select time zone (user, venue or GMT - only applicable for MATCH, mandatory if start or end is entered)
+
+    For any top-level item, we have to set the "match" rules
+
+    - - For tournament, select teams and select players for those teams (squad)
+
+
+TOP-LEVEL EVENT
+    - Has teams and their players (SQUADS)
+    - Sports Type and SubType
+
+
+ALL EVENTS
+    - Rules (note that even group-like can have penalties, because they may want to force a result)
+    - Set up teams
+    - If group-like
+        - Group Stats
+        - If there are matches, show the schedule
+        - You cannot create a sub-sportsEvent
+
+
+
+Sub-level item
+* Under EVENT, allow to create EVENT or MATCH
+* Under GROUP, allow to create MATCH. No sub-groups - You can use sub-rounds to handle this.
+* All items under a parent must be of the same type.
+* An sportsEvent may have no matches or groups - for example to ®organize 3rd place finishes for selection (1986 FIFA World cup)
+* Creating an EVENT
+    - + sports_event_id auto-generated
+    - + owner_id programmatically added
+    - + root_id, parent_id, left_sibling_id OBTAINED from UI (without user intervention)
+    - + Event Type = GROUP (should have been selected by user on click to get form)
+    - + Sports Type = null (should inherit from the root)
+    - + Sports Sub Type = null (should inherit from the root)
+    - + Gender = null (should inherit from the root)
+    - * Enter name (mandatory)
+    - - Enter description (optional)
+    - - Choose a venue (optional) - Not sure if this is really that important. Most cases, people look at tournament or match venue
+    - - Enter start date (optional) - DATE only
+    - - Enter end date (optional) - DATE only
+
+* If Treat as Group is NOT checked off
+
+* If Treat as Group is checked off
+    - Only allow MATCH to be created under it
+    - - Enter GROUP rules
+
+    - - Add all the teams for this group
+           - Allow to generate all round-robin matches
+           - Allow to generate group results table
+    - - Allow user to edit group results table
+
+MATCH
+    - Scorecard
+    - Teams/Players
+
+* Creating a MATCH
+    - + sports_event_id auto-generated
+    - + owner_id programmatically added
+    - + root_id, parent_id, left_sibling_id OBTAINED from UI (without user intervention)
+    - + Event Type = MATCH (should have been selected by user on click to get form)
+    - + Sports Type = null (should inherit from the root)
+    - + Sports Sub Type = null (should inherit from the root)
+    - + Gender = null (should inherit from the root)
+    - + Name will be generated from the teams playing. This is custom
+    - + Description = null (Maybe we may allow people to edit the description)
+    - - Choose a venue (optional)
+    - - Enter start date and time (optional - but if entered, must enter TIME)
+    - - Enter end date and time (optional - but if entered, must enter TIME)
+    - - Select time zone (user, venue - mandatory if start or end is entered)
+    - Other fields (example SOCCER)
+        - - Team A (mandatory) - this is either
+            * Select one team
+            * Select ROUND > GROUP > Position X
+            * Select ROUND > MATCH > Winner/Loser
+            * Select ROUND > GROUP > MATCH > Winner/Loser
+        - - Team B (mandatory) - See above
+        - - Choose Home Team (mandatory - default is NEUTRAL)
+        - - Result (optional - because you may be just setting up the game)
+        - - Score (optional)
+        - - Result Stage - should be programmatically obtained from the Score
+
+    - - Allow users to enter scorecard
+    - - Allow users to choose the players who participated in the match
+
+
+We have
+    - sports_match_soccer
+    - sports_group_soccer
+    - sports_event_soccer_rules
+    - sports_match_cricket
+    - sports_group_cricket
+    - sports_event_cricket_rules
+
+
+Not Doing for the Time Being
+* Ball-by-ball input for cricket match - We will only do scorecards
+    - This may be a useful mobile app that can then produce scorecards that can be imported
+    - We may need this in the long run to calculate statistics
+    - The reason for not doing this now is that it is better to get more sports into the mix
+    - Also for not top-level tournaments, this is not that important
+* Sports such as gymnastics, athletics, etc.
+* Sports meets which have multiple kinds of sportsEvents
+
+
+
+
+

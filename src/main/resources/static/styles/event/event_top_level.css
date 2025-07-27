@@ -1,0 +1,8 @@
+.timepicker .datetimepicker-hours thead, .timepicker .datetimepicker-minutes .switch {
+    display: none;
+}
+
+.timepicker .datetimepicker-hours table, .timepicker .datetimepicker-minutes table {
+    width: 193px;
+}
+

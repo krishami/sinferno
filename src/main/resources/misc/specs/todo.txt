@@ -1,0 +1,61 @@
+* Delete Group
+
+* Add Match inside group
+* Edit Match inside group
+* Add and Edit Match should generate group stats
+* Add Match for round -> requires matches to be automatically numbered
+* Edit Match for round
+* Add/Edit Group Rules
+* Override Group Entry details only if team is known/determined
+    - If the team is known/determined, then and then only allow to edit the details (such as Played, Won, etc.)
+* Override Group Qualification details
+* Edit Group team playing
+    - Need to build selection of results from other groups in Group dropdown
+    - If details are not edited use the BinaryAddGroupForm, else use the specific XYZGroupForm (?)
+* See above. To implement in Match screen in Rounds
+* No pagination at first.
+
+---
+
+* Pagination everywhere
+* Reports
+
+Notes field in groups: Maybe need a reason for overriding group details or qualification
+
+
+If it is currently Treat As Group, and then the checkbox is unchecked,
+  check if there are groups and matches under it and (maybe) do not allow
+
+A group round may need a play-off to determine qualifiers.
+      This will need to be incorporated into the group selection
+
+mySQL utf-8 is 3 bytes by default
+
+Do auto-height of text area: http://www.jacklmoore.com/autosize/
+
+Install the application on a hosting site
+Invitations for beta
+Prevent DOS attacks or scripting attacks
+    - First line is prevent users from completing more than 1 action per second
+    - Also enforce limitations on every resource
+        - Useful also from the point of fremium models
+Cache-buster for JavaScript files (implement semantic versioning)
+    - This should actually be pretty easy to do with the new framework. Append the build number to the Sinferno JS/CSS files
+CDN for external JavaScript libraries with fallback local
+    - This can be done inside PageView
+
+For every delete, check for Foreign Key constraints - in some cases, we may need to *implement* a manual cascade delete
+by deleting all sub-records
+
+Write a proper health check
+
+Don't let the perfect be the enemy of good enough!!!
+    - And so we defer Backbone/Marionette until we can get the screen working with the right logic
+
+http://fortawesome.github.io/Font-Awesome/
+
+https://fonticons.com/start
+https://github.com/jquery/globalize
+http://qunitjs.com/
+
+Read-only mode during times of maintenance, so that users don't see a problem

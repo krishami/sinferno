@@ -1,0 +1,81 @@
+NECESSARY
+
+* Bootstrap (Twitter) [Need version number]
+    http://getbootstrap.com/
+    https://github.com/twbs/bootstrap/blob/master/LICENSE
+         MIT License
+
+* JQuery
+    https://jquery.com/
+    https://jquery.org/license/
+        MIT license
+
+* Underscore [Need version number]
+    http://underscorejs.org/
+    https://github.com/jashkenas/underscore/blob/master/LICENSE
+        Looks like MIT license
+
+* Font Awesome (MIT)
+    http://fontawesome.io/license/
+
+
+ALTERNATIVES can be found
+
+* Bootbox - Find an alternative
+    http://bootboxjs.com/
+    https://github.com/makeusabrew/bootbox/blob/master/LICENSE.md
+        MIT License
+
+* Bootstrap Datetimepicker
+    http://www.malot.fr/bootstrap-datetimepicker/demo.php
+    https://github.com/smalot/bootstrap-datetimepicker/blob/master/LICENSE
+        Apache License Version 2.0, January 2004
+
+* JSTZ (Timezone)
+    http://pellepim.bitbucket.org/jstz/
+    https://bitbucket.org/pellepim/jstimezonedetect/src/3a00f59861bddc0d8d169c54dc7b1e7a983b6a3d/LICENCE.txt?at=default&fileviewer=file-view-default
+        MIT license
+
+* Moment [Need version number]
+    http://momentjs.com/
+    https://github.com/moment/moment/blob/develop/LICENSE
+        MIT License
+
+* Selectize [Need version number]
+    https://brianreavis.github.io/selectize.js/
+    https://github.com/brianreavis/selectize.js/blob/master/LICENSE
+        Apache License Version 2.0, January 2004
+
+* Tree JQuery [Need version number]
+    https://github.com/mbraak/jqTree
+    https://github.com/mbraak/jqTree/blob/master/LICENSE
+         Apache License Version 2.0, January 2004
+
+* Underscore String [Need version number]
+    https://github.com/epeli/underscore.string
+        MIT License
+
+Images
+
+Soccer ball
+    https://en.wikipedia.org/wiki/File:Cricketball.svg
+
+Cricket ball
+    https://pixabay.com/en/cricket-ball-cricket-ball-sports-295206/
+
+favicon.ico
+    Created
+
+
+No longer included (may be used in the future)
+
+- ReactJS [Includes JSX Transformer] (FaceBook) - No longer included
+    https://facebook.github.io/react/
+    https://github.com/facebook/react/blob/master/LICENSE
+        BSD License
+
+- Handlebars
+    https://github.com/wycats/handlebars.js
+    https://github.com/wycats/handlebars.js/blob/master/LICENSE
+        Looks like MIT license
+

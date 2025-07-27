@@ -1,0 +1,11 @@
+
+.App {
+  text-align: center;
+  margin-top: 50px;
+}
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+}

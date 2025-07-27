@@ -1,0 +1,61 @@
+.eventTreeContainer {
+    background-color: #ffffff;
+    border: 0 dotted #999999;
+    font-size: 14pt;
+    padding: 1em;
+}
+
+.eventWorkAreaContainer {
+    border: 0 dotted #cccccc;
+    padding: 0 1em 1em 1em;
+}
+
+.eventViewIcon {
+    vertical-align: text-bottom;
+}
+
+#eventTree {
+    overflow: auto;
+    clear: both;
+}
+
+.timepicker .datetimepicker-hours thead, .timepicker .datetimepicker-minutes .switch {
+    display: none;
+}
+
+.timepicker .datetimepicker-hours table, .timepicker .datetimepicker-minutes table {
+    width: 193px;
+}
+
+.teamsClass {
+    margin-top: 0.2in;
+    margin-bottom: 0.2in;
+    border: 1px solid darkgray;
+}
+
+.teamsClass th {
+    padding: 5px;
+    text-align: center;
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+
+.teamsClass td {
+    padding: 5px;
+    width: 100px;
+    white-space: nowrap;
+}
+
+.teamsClass tr:nth-child(odd) {
+    background: #f0f0f0;
+}
+
+.sn-center {
+    text-align: center;
+}
+.sn-right {
+    text-align: right;
+}
+
+
+
